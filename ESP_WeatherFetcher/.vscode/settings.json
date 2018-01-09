@@ -3,6 +3,8 @@
         "array": "cpp",
         "vector": "cpp",
         "xstring": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "internet.h": "c",
+        "keys.h": "c"
     }
 }

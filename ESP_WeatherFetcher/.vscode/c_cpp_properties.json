@@ -51,8 +51,7 @@
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.14393.0/shared",
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.14393.0/winrt",
                 "C:/Users/anteo/Documents/Arduino/libraries/ArduinoJson/src",
-                "${workspaceRoot}",
-                "C:\\Users\\anteo\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.3.0\\cores\\esp8266"
+                "${workspaceRoot}"
             ],
             "defines": [
                 "_DEBUG",
