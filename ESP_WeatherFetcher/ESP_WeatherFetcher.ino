@@ -13,6 +13,7 @@ void setup()
   while (!Serial)
     continue;
 
+  Serial.println("");
   Serial.print("Spajam se: ");
   Serial.println(initWifi());
 
@@ -39,6 +40,8 @@ void setup()
   Serial.println(hight);
   Serial.print("Temp low: ");
   Serial.println(lowt);
+
+  getWeatherData();
 }
 
 void loop()
