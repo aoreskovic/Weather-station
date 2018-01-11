@@ -21,34 +21,40 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
 Dialog DLL:      TCM.DLL V1.14.9.0
  
 <h2>Project:</h2>
-H:\Dropbox\FER\PPIUS\lab2\Lab_GPIO\Template.uvprojx
-Project File Date:  01/07/2018
+H:\Dropbox\Projects\PPIUS_Weather-stationg\STM_Discovery_Code\Template.uvprojx
+Project File Date:  01/11/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'Target 1'
 assembling startup_stm32f40_41xxx.s...
+compiling I2C.c...
+Src\I2C.c(12): error:  #20: identifier "RCC_APB2Periph_GPIOB" is undefined
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
+Src\I2C.c(13): error:  #20: identifier "RCC_APB2Periph_AFIO" is undefined
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+Src\I2C.c(29): error:  #20: identifier "GPIO_Mode_AF_OD" is undefined
+    i2c_gpio.GPIO_Mode = GPIO_Mode_AF_OD;
+Src\I2C.c: 0 warnings, 3 errors
+compiling delay.c...
 compiling system_stm32f4xx.c...
-compiling main.c...
 compiling gpio.c...
+compiling LiquidCrystal_I2C.c...
+Src\LiquidCrystal_I2C.c(44): warning:  #223-D: function "init_I2C1" declared implicitly
+    init_I2C1(); // Wire.begin();
+Src\LiquidCrystal_I2C.c(227): warning:  #223-D: function "I2C_StartTransmission" declared implicitly
+  	I2C_StartTransmission (I2C1, I2C_Direction_Transmitter, lcdi2c.Addr); //Wire.beginTransmission(_Addr);
+Src\LiquidCrystal_I2C.c(228): warning:  #223-D: function "I2C_WriteData" declared implicitly
+  	I2C_WriteData(I2C1, (int)(_data) | lcdi2c.backlightval);  //printIIC((int)(_data) | _backlightval);
+Src\LiquidCrystal_I2C.c: 3 warnings, 0 errors
+compiling main.c...
 compiling list.c...
 compiling croutine.c...
 compiling event_groups.c...
-compiling timers.c...
 compiling queue.c...
+compiling timers.c...
 compiling tasks.c...
-linking...
-.\Objects\Template.axf: Error: L6218E: Undefined symbol pvPortMalloc (referred from event_groups.o).
-.\Objects\Template.axf: Error: L6218E: Undefined symbol vPortEnterCritical (referred from event_groups.o).
-.\Objects\Template.axf: Error: L6218E: Undefined symbol vPortExitCritical (referred from event_groups.o).
-.\Objects\Template.axf: Error: L6218E: Undefined symbol vPortFree (referred from event_groups.o).
-.\Objects\Template.axf: Error: L6218E: Undefined symbol vPortValidateInterruptPriority (referred from queue.o).
-.\Objects\Template.axf: Error: L6218E: Undefined symbol pxPortInitialiseStack (referred from tasks.o).
-.\Objects\Template.axf: Error: L6218E: Undefined symbol vPortEndScheduler (referred from tasks.o).
-.\Objects\Template.axf: Error: L6218E: Undefined symbol xPortStartScheduler (referred from tasks.o).
-Not enough information to list image symbols.
-Finished: 1 information, 0 warning and 8 error messages.
-".\Objects\Template.axf" - 8 Error(s), 0 Warning(s).
+".\Objects\Template.axf" - 3 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -59,7 +65,7 @@ Package Vendor: ARM
    * Component: CORE Version: 5.0.1
 
 <h2>Collection of Component include folders:</h2>
-  H:\Dropbox\FER\PPIUS\lab2\Lab_GPIO\RTE
+  H:\Dropbox\Projects\PPIUS_Weather-stationg\STM_Discovery_Code\RTE
   C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include
   C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 

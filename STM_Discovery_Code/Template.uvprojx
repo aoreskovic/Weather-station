@@ -334,7 +334,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx, USE_STDPERIPH_DRIVER,HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>.\;Lib\CMSIS\Include;Lib\CMSIS\Device\ST\STM32F4xx\Include;Lib\STM32F4xx_StdPeriph_Driver\inc;FreeRTOS\include;FreeRTOS\portable\keil\ARM_CM4F</IncludePath>
+              <IncludePath>.\;Lib\CMSIS\Include;Lib\CMSIS\Device\ST\STM32F4xx\Include;Lib\STM32F4xx_StdPeriph_Driver;FreeRTOS\include;FreeRTOS\portable\keil\ARM_CM4F</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -420,7 +420,22 @@
             <File>
               <FileName>gpio.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\gpio.h</FilePath>
+              <FilePath>.\Src\gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\delay.h</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\I2C.h</FilePath>
+            </File>
+            <File>
+              <FileName>LiquidCrystal_I2C.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\LiquidCrystal_I2C.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -428,9 +443,24 @@
           <GroupName>Source</GroupName>
           <Files>
             <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\I2C.c</FilePath>
+            </File>
+            <File>
+              <FileName>LiquidCrystal_I2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\LiquidCrystal_I2C.c</FilePath>
+            </File>
+            <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\gpio.c</FilePath>
+              <FilePath>.\Src\gpio.c</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
