@@ -34,7 +34,7 @@ int initWifi()
 }
 
 
-int getWeatherData()
+int getWeatherData(String *returnString)
 {
     String resultString;
     // Stop all previous connections

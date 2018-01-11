@@ -1,6 +1,7 @@
 
 ESP_WeatherFetcher/keys.h
 ESP_WeatherFetcher/build/*
+Ignore/*
 
 # Prerequisites
 *.d
