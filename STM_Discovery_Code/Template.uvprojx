@@ -332,9 +332,9 @@
             <v6WtE>0</v6WtE>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F40_41xxx, USE_STDPERIPH_DRIVER,HSE_VALUE=8000000</Define>
+              <Define>STM32F40_41xxx, USE_STDPERIPH_DRIVER, HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>.\;Lib\CMSIS\Include;Lib\CMSIS\Device\ST\STM32F4xx\Include;Lib\STM32F4xx_StdPeriph_Driver;FreeRTOS\include;FreeRTOS\portable\keil\ARM_CM4F</IncludePath>
+              <IncludePath>.\;Lib\CMSIS\Include;Lib\CMSIS\Device\ST\STM32F4xx\Include;Lib\STM32F4xx_StdPeriph_Driver\inc;FreeRTOS\include;FreeRTOS\portable\keil\ARM_CM4F;Src\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -375,43 +375,23 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>BSP</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f40_41xxx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Lib\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f40_41xxx.s</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\stm32f4xx_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Lib\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Lib\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STM_Lib</GroupName>
-          <Files>
-            <File>
-              <FileName>STM_Peripheral_Lib_v1.7.1.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>.\STM_Peripheral_Lib_v1.7.1.lib</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Header</GroupName>
           <Files>
+            <File>
+              <FileName>LiquidCrystal_I2C.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\LiquidCrystal_I2C.h</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\I2C.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\delay.h</FilePath>
+            </File>
             <File>
               <FileName>main.h</FileName>
               <FileType>5</FileType>
@@ -422,26 +402,21 @@
               <FileType>5</FileType>
               <FilePath>.\Src\gpio.h</FilePath>
             </File>
-            <File>
-              <FileName>delay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Src\delay.h</FilePath>
-            </File>
-            <File>
-              <FileName>I2C.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Src\I2C.h</FilePath>
-            </File>
-            <File>
-              <FileName>LiquidCrystal_I2C.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Src\LiquidCrystal_I2C.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Source</GroupName>
           <Files>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\main.c</FilePath>
+            </File>
             <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
@@ -456,16 +431,6 @@
               <FileName>LiquidCrystal_I2C.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Src\LiquidCrystal_I2C.c</FilePath>
-            </File>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Src\gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -503,9 +468,64 @@
               <FilePath>.\FreeRTOS\timers.c</FilePath>
             </File>
             <File>
+              <FileName>port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\portable\keil\ARM_CM4F\port.c</FilePath>
+            </File>
+            <File>
               <FileName>FreeRTOSConfig.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\FreeRTOS\include\FreeRTOSConfig.h</FilePath>
+            </File>
+            <File>
+              <FileName>heap_2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\portable\MemMang\heap_2.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>startup_stm32f40_41xxx.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Lib\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f40_41xxx.s</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\stm32f4xx_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Lib\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lib\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4_discovery.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\stm32f4_discovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4_discovery.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\stm32f4_discovery.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STM_Lib</GroupName>
+          <Files>
+            <File>
+              <FileName>STM_Peripheral_Lib_v1.7.1.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>.\STM_Peripheral_Lib_v1.7.1.lib</FilePath>
             </File>
           </Files>
         </Group>
