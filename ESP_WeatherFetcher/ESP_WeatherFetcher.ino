@@ -4,7 +4,7 @@
 
 
 
-StaticJsonBuffer<800> jsonBuffer;
+StaticJsonBuffer<10000> jsonBuffer;
 
 
 void setup()
@@ -17,8 +17,14 @@ void setup()
   Serial.print("Spajam se: ");
   Serial.println(initWifi());
 
-  char json[] =
-      "{\"coord\":{\"lon\":-0.13,\"lat\":51.51},\"weather\":[{\"id\":300,\"main\":\"Drizzle\",\"description\":\"light intensity drizzle\",\"icon\":\"09d\"}],\"base\":\"stations\",\"main\":{\"temp\":280.32,\"pressure\":1012,\"humidity\":81,\"temp_min\":279.15,\"temp_max\":281.15},\"visibility\":10000,\"wind\":{\"speed\":4.1,\"deg\":80},\"clouds\":{\"all\":90},\"dt\":1485789600,\"sys\":{\"type\":1,\"id\":5091,\"message\":0.0103,\"country\":\"GB\",\"sunrise\":1485762037,\"sunset\":1485794875},\"id\":2643743,\"name\":\"London\",\"cod\":200}";
+  String json;
+
+  {
+    getWeatherData(&json);
+  } 
+  Serial.println("---------u mainu sam");
+  Serial.println(json); /**/
+
 
   JsonObject &root = jsonBuffer.parseObject(json);
 
@@ -28,20 +34,23 @@ void setup()
     return;
   }
 
-  double hight = root["main"]["temp_min"];
-  double lowt = root["main"]["temp_max"];
+  double hight = root["current"]["temp_c"];
+  String description = root["current"]["condition"]["text"];
+  int clouds = root["current"]["cloud"];
+  String date = root["location"]["localtime"];
 
-  hight -= 273.15;
-  lowt -= 273.15;
 
   // Print values.
   Serial.println("");
-  Serial.print("Temp high: ");
+  Serial.print("Temp: ");
   Serial.println(hight);
-  Serial.print("Temp low: ");
-  Serial.println(lowt);
+  Serial.print("Description: ");
+  Serial.println(description);
+  Serial.print("Clouds: ");
+  Serial.print(clouds);
+  Serial.println(" %");
 
-  getWeatherData();
+
 }
 
 void loop()
