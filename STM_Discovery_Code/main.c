@@ -5,11 +5,17 @@
 #include "queue.h"
 #include "semphr.h"
 
+#include "string.h"
+#include "icons.h"
+
 #include <stm32f4_discovery.h>
 
 #include <main.h>
 //#include <stdlib.h>
 //#include <string.h>
+
+volatile char received_string[MAX_STRLEN + 1]; // this will hold the recieved string
+
 
 // forward declarations of task functions
 void vTask1(void *pvParameters);
@@ -19,66 +25,20 @@ void vTask4(void *pvParameters);
 
 xTaskHandle xTaskHandle1, xTaskHandle2, xTaskHandle3, xTaskHandle4;
 
-int strlen(const char *str)
-{
-    const char *s;
 
-    s = str;
-    while (*s)
-        s++;
-    return s - str;
-}
 
-char *strrev(char *str)
-{
-    char *p1, *p2;
 
-    if (!str || !*str)
-        return str;
-
-    for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2)
-    {
-        *p1 ^= *p2;
-        *p2 ^= *p1;
-        *p1 ^= *p2;
-    }
-
-    return str;
-}
-
-char *itoa(int n, char *s, int b)
-{ //b is for number base; 2,8,10,16 etc
-    static char digits[] = "0123456789abcdefghijklmnopqrstuvwxyz";
-    int i = 0, sign;
-
-    if ((sign = n) < 0)
-        n = -n;
-
-    do
-    {
-        s[i++] = digits[n % b];
-    } while ((n /= b) > 0);
-
-    if (sign < 0)
-        s[i++] = '-';
-    s[i] = '\0';
-
-    return strrev(s);
-}
 
 int main(void)
 {
     uint8_t data;
     //Describe special character:
-    uint8_t heart[8] = {0x0, 0xa, 0x1f, 0x1f, 0xe, 0x4, 0x0};
-    uint8_t drop[8] = {0x04, 0x04, 0x0E, 0x0E, 0x1F, 0x1F, 0x1F, 0x0E};
-    uint8_t sun_l[8] = { 0x08, 0x04, 0x01, 0x03, 0x1B, 0x03, 0x01, 0x04};
-    uint8_t sun_d[8] = { 0x02, 0x04, 0x10, 0x18, 0x1B, 0x18, 0x10, 0x04};
-    uint8_t obl_l[8] = {0x00, 0x03, 0x04, 0x0C, 0x12, 0x10, 0x0F, 0x00};
-    uint8_t obl_d[8] = { 0x00, 0x10, 0x0C, 0x12, 0x01, 0x01, 0x1E, 0x00};
+
     int i;
     int x;
     char buf[10];
+
+    init_USART1(115200);
 
     LCDI2C_init(0x27, 20, 4); //Setup for I2C address 27, 16x2 LCD.
 
@@ -92,22 +52,22 @@ int main(void)
 
     LCDI2C_createChar(2, sun_l);
     LCDI2C_clear();
-    LCDI2C_createChar(3, sun_d);
+    LCDI2C_createChar(3, sun_r);
     LCDI2C_clear();
 
-    LCDI2C_createChar(4, obl_l);
+    LCDI2C_createChar(4, cloud_l);
     LCDI2C_clear();
-    LCDI2C_createChar(5, obl_d);
+    LCDI2C_createChar(5, cloud_r);
     LCDI2C_clear();
-
-
 
     // -------  blink backlight  -------------
+    /*
     LCDI2C_backlight(); //Turn on Backlight
     Delay(100);
     LCDI2C_noBacklight(); //Turn off Backlight
     Delay(100);
     LCDI2C_backlight(); //Turn on Backlight
+    */
 
     LCDI2C_write_String("Ikone: ");
 

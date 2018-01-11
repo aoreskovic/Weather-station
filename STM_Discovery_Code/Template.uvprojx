@@ -402,11 +402,36 @@
               <FileType>5</FileType>
               <FilePath>.\Src\gpio.h</FilePath>
             </File>
+            <File>
+              <FileName>icons.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\icons.h</FilePath>
+            </File>
+            <File>
+              <FileName>usart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\usart.h</FilePath>
+            </File>
+            <File>
+              <FileName>string.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\string.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Source</GroupName>
           <Files>
+            <File>
+              <FileName>string.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\string.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\usart.c</FilePath>
+            </File>
             <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>

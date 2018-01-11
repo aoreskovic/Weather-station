@@ -94,7 +94,7 @@ typedef struct
   void LCDI2C_backlight(void);
   void LCDI2C_autoscroll(void);
   void LCDI2C_noAutoscroll(void);
-  void LCDI2C_createChar(uint8_t location, uint8_t charmap[]);
+  void LCDI2C_createChar(uint8_t location, const uint8_t charmap[]);
   void LCDI2C_setCursor(uint8_t col, uint8_t row);
   void LCDI2C_write_String(char* str);
   void LCDI2C_command(uint8_t value);
