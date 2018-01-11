@@ -1,0 +1,7 @@
+
+#define AP_NAME "C15"
+#define PASS "2i9n6TtdMBL3"
+
+#define API_KEY "/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22"
+
+//"2a826e5f06c4821fff8b13b00f1e232d"
