@@ -8,7 +8,6 @@
 #include <stm32f4xx_usart.h> 
 #include "gpio.h"
 #include "delay.h"
-#include "usart.h"
 #include "I2C.h"
 #include "LiquidCrystal_I2C.h"
 

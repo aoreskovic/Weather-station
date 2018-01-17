@@ -10,9 +10,14 @@
 
 #include <stm32f4_discovery.h>
 
+#include "defines.h"
+#include "tm_stm32f4_usart.h"
+
 #include <main.h>
 //#include <stdlib.h>
 //#include <string.h>
+
+#define MAX_STRLEN 300
 
 volatile char received_string[MAX_STRLEN + 1]; // this will hold the recieved string
 
@@ -26,14 +31,19 @@ xTaskHandle xTaskHandle1, xTaskHandle2, xTaskHandle3, xTaskHandle4;
 
 int main(void)
 {
+		SystemInit();
     uint8_t data;
     //Describe special character:
+	
+	  TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
+    
+    /* Put string to USART */
+    TM_USART_Puts(USART2, "Hello world\n\r");
 
     int i;
     int x;
     char buf[10];
 
-		init_USART2(19200); // initialize USART1 @ 9600 baud
 		
     LCDI2C_init(0x27, 20, 4); //Setup for I2C address 27, 16x2 LCD.
 
@@ -56,11 +66,10 @@ int main(void)
     LCDI2C_clear();
 
     // -------  blink backlight  -------------
-
-    LCDI2C_backlight(); //Turn on Backlight
+    /*LCDI2C_backlight(); //Turn on Backlight
     Delay(100);
     LCDI2C_noBacklight(); //Turn off Backlight
-    Delay(100);
+    Delay(100);*/
     LCDI2C_backlight(); //Turn on Backlight
 
     LCDI2C_write_String("Ikone: ");
@@ -82,7 +91,7 @@ int main(void)
 
     
 
-    USART_puts(USART2, "Init complete! Hello World!\r\n"); // just send a message to indicate that it works
+				//USART_puts(USART2, "Init complete! Hello World!\r\n"); // just send a message to indicate that it works
 
     while (1)
     {
@@ -90,8 +99,9 @@ int main(void)
         LCDI2C_setCursor(11, 1);
         LCDI2C_write_String(buf);
         LCDI2C_write_String("  ");
+			
+				TM_USART_Puts(USART2, "Loptylop\r\n");
 				
-				USART_puts(USART2, "Loptylop\r\n");
 			
         //LCDI2C_setCursor(18, x % 4 + 1);
         //LCDI2C_write_String("  ");

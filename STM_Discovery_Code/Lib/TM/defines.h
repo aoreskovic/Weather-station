@@ -28,6 +28,8 @@
 #ifndef TM_DEFINES_H
 #define TM_DEFINES_H
 
+#define USART_BUFFER_SIZE 64
+
 /* Put your global defines for all libraries here used in your project */
 
 #endif

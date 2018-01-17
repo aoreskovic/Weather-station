@@ -1,11 +1,10 @@
 --cpu Cortex-M4.fp
 ".\objects\string.o"
-".\objects\usart.o"
-".\objects\gpio.o"
 ".\objects\main.o"
 ".\objects\delay.o"
 ".\objects\i2c.o"
 ".\objects\liquidcrystal_i2c.o"
+".\objects\gpio.o"
 ".\objects\croutine.o"
 ".\objects\event_groups.o"
 ".\objects\list.o"
