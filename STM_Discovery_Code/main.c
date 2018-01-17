@@ -16,7 +16,6 @@
 
 volatile char received_string[MAX_STRLEN + 1]; // this will hold the recieved string
 
-
 // forward declarations of task functions
 void vTask1(void *pvParameters);
 void vTask2(void *pvParameters);
@@ -24,10 +23,6 @@ void vTask3(void *pvParameters);
 void vTask4(void *pvParameters);
 
 xTaskHandle xTaskHandle1, xTaskHandle2, xTaskHandle3, xTaskHandle4;
-
-
-
-
 
 int main(void)
 {
@@ -38,8 +33,8 @@ int main(void)
     int x;
     char buf[10];
 
-    init_USART1(115200);
-
+		init_USART2(19200); // initialize USART1 @ 9600 baud
+		
     LCDI2C_init(0x27, 20, 4); //Setup for I2C address 27, 16x2 LCD.
 
     // Create and write special character at location 0.
@@ -61,13 +56,12 @@ int main(void)
     LCDI2C_clear();
 
     // -------  blink backlight  -------------
-    /*
+
     LCDI2C_backlight(); //Turn on Backlight
     Delay(100);
     LCDI2C_noBacklight(); //Turn off Backlight
     Delay(100);
     LCDI2C_backlight(); //Turn on Backlight
-    */
 
     LCDI2C_write_String("Ikone: ");
 
@@ -85,12 +79,20 @@ int main(void)
     //Write an integer:
     LCDI2C_write_String("ARM-GCC  x=");
     x = 0;
+
+    
+
+    USART_puts(USART2, "Init complete! Hello World!\r\n"); // just send a message to indicate that it works
+
     while (1)
     {
         itoa(x, buf, 16); // itoa takes number base as 3rd argument. Here; hex.
         LCDI2C_setCursor(11, 1);
         LCDI2C_write_String(buf);
         LCDI2C_write_String("  ");
+				
+				USART_puts(USART2, "Loptylop\r\n");
+			
         //LCDI2C_setCursor(18, x % 4 + 1);
         //LCDI2C_write_String("  ");
         x = x + 1;
