@@ -12,8 +12,8 @@ int initWifi()
   char pwd[] = PASS;     // your network password (use for WPA, or use as key for WEP)[]
 
   int connAttempts = 0;
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
+  /*Serial.print("Connecting to ");
+  Serial.println(ssid);*/
 
   WiFi.begin(ssid, pwd);
 
@@ -26,10 +26,11 @@ int initWifi()
     connAttempts++;
   }
 
+  /*
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.println(WiFi.localIP());*/
   return 1;
 }
 
@@ -51,8 +52,8 @@ int getWeatherData(String* weather)
   }
 
   // We now create a URI for the request
-  Serial.print("Requesting URL: ");
-  Serial.println(url);
+  /*Serial.print("Requesting URL: ");
+  Serial.println(url);*/
 
   // This will send the request to the server
   client.print(String("GET ") + url + " HTTP/1.1\r\n" +
@@ -73,7 +74,7 @@ int getWeatherData(String* weather)
   {
     resultString = client.readStringUntil('\n');
 
-    Serial.print("\n\t" + resultString);
+    //Serial.print("\n\t" + resultString);
     //*
     if (resultString.startsWith("{")) {
       *(weather) = resultString;
@@ -82,7 +83,7 @@ int getWeatherData(String* weather)
   }
 
   Serial.println();
-  Serial.println("closing connection");
+  //Serial.println("closing connection");
 
   // redundant, should probably remove
   client.stop();
