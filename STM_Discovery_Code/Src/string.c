@@ -47,3 +47,15 @@ char *itoa(int n, char *s, int b)
     return strrev(s);
 }
 
+int splitString(char* str, int* starts){
+    
+    char* index;
+    int i = 0;
+    while(1){
+        index = strstr(str, "$");
+        if(index == NULL)
+            return 0;
+        starts[i] = index - str;
+        i++;
+    }
+}

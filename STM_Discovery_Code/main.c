@@ -1,5 +1,7 @@
 /* main.c */
 
+#include <stdio.h>
+
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
@@ -29,22 +31,23 @@ void vTask4(void *pvParameters);
 
 xTaskHandle xTaskHandle1, xTaskHandle2, xTaskHandle3, xTaskHandle4;
 
+char uart_buffer[401] = "";
+
+char LCD_output[4][41];
+
 int main(void)
 {
-		SystemInit();
+    SystemInit();
     uint8_t data;
     //Describe special character:
-	
-	  TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
-    
+
+    TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
+
     /* Put string to USART */
     TM_USART_Puts(USART2, "Hello world\n\r");
 
     int i;
-    int x;
-    char buf[10];
 
-		
     LCDI2C_init(0x27, 20, 4); //Setup for I2C address 27, 16x2 LCD.
 
     // Create and write special character at location 0.
@@ -87,11 +90,20 @@ int main(void)
 
     //Write an integer:
     LCDI2C_write_String("ARM-GCC  x=");
-    x = 0;
 
-    
+    //USART_puts(USART2, "Init complete! Hello World!\r\n"); // just send a message to indicate that it works
 
-				//USART_puts(USART2, "Init complete! Hello World!\r\n"); // just send a message to indicate that it works
+    gpio_init();
+    STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_GPIO);
+    xTaskCreate(vTask1, "TASK1", 1000, NULL, 1, &xTaskHandle1);
+    xTaskCreate(vTask2, "TASK2", 1000, NULL, 1, NULL);
+    vTaskStartScheduler();
+}
+
+void vTask1(void *pvParameters)
+{
+    int x = 0;
+    char buf[10];
 
     while (1)
     {
@@ -99,10 +111,7 @@ int main(void)
         LCDI2C_setCursor(11, 1);
         LCDI2C_write_String(buf);
         LCDI2C_write_String("  ");
-			
-				TM_USART_Puts(USART2, "Loptylop\r\n");
-				
-			
+
         //LCDI2C_setCursor(18, x % 4 + 1);
         //LCDI2C_write_String("  ");
         x = x + 1;
@@ -115,7 +124,7 @@ int main(void)
         LCDI2C_write(1);
         LCDI2C_setCursor(17, (x + 0) % 4);
         LCDI2C_write(1);
-        Delay(500);
+        vTaskDelay(500 / portTICK_RATE_MS);
         LCDI2C_setCursor(15, (x + 1) % 4);
         LCDI2C_write_String(" ");
         LCDI2C_setCursor(16, (x + 2) % 4);
@@ -123,75 +132,37 @@ int main(void)
         LCDI2C_setCursor(17, (x + 0) % 4);
         LCDI2C_write_String(" ");
     }
-
-    gpio_init();
-    STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_GPIO);
-    xTaskCreate(vTask1, "TASK1", configMINIMAL_STACK_SIZE, NULL, 1, &xTaskHandle1);
-    vTaskStartScheduler();
-}
-
-void vTask1(void *pvParameters)
-{
-    uint32_t value, tasksCount, led_state;
-    tasksCount = 1; // we have only one task at this point
-    led_state = 1;
-    while (1)
-    {
-        vTaskDelay(500 / portTICK_RATE_MS);       // LED blinking frequency
-        gpio_led_state(LED4_GREEN_ID, led_state); // green LED
-        led_state = (led_state == 1) ? 0 : 1;
-        value = STM_EVAL_PBGetState(BUTTON_USER);
-        if (value == 1)
-        {
-            // add new task
-            tasksCount++;
-            // keypressed - add new task
-            if (tasksCount == 5)
-            {
-                // kill all tasks except this
-                vTaskDelete(xTaskHandle2);
-                vTaskDelete(xTaskHandle3);
-                vTaskDelete(xTaskHandle4);
-                // turn off all leds
-                gpio_led_state(LED3_ORANGE_ID, 0);
-                gpio_led_state(LED5_RED_ID, 0);
-                gpio_led_state(LED6_BLUE_ID, 0);
-                tasksCount = 1;
-            }
-            else
-            {
-                switch (tasksCount)
-                {
-                case 2:
-                    xTaskCreate(vTask2, "TASK2",
-                                configMINIMAL_STACK_SIZE,
-                                NULL, 1, &xTaskHandle2);
-                    break;
-                case 3:
-                    xTaskCreate(vTask3, "TASK3",
-                                configMINIMAL_STACK_SIZE,
-                                NULL, 1, &xTaskHandle3);
-                    break;
-                case 4:
-                    xTaskCreate(vTask4, "TASK4",
-                                configMINIMAL_STACK_SIZE,
-                                NULL, 1, &xTaskHandle4);
-                    break;
-                }
-            }
-        }
-    }
 }
 
 void vTask2(void *pvParameters)
-{
-    uint32_t led_state;
-    led_state = 1;
+{   
+    char buf[10];
+    int numchar = 0;
+
+    int strindex[15];
+
     while (1)
     {
-        vTaskDelay(500 / portTICK_RATE_MS);        // LED blinking frequency
-        gpio_led_state(LED3_ORANGE_ID, led_state); // orange LED
-        led_state = (led_state == 1) ? 0 : 1;
+        vTaskDelay(1000 / portTICK_RATE_MS);
+
+        numchar = TM_USART_Gets(USART2, uart_buffer, 400);
+        if((numchar == 0) || (uart_buffer[0] != '^'))
+            continue;
+
+        
+        TM_USART_Puts(USART2, "\r\nNumchar: ");
+        TM_USART_Puts(USART2, itoa(numchar, buf,10));
+        TM_USART_Puts(USART2, "\r\n");
+        TM_USART_Puts(USART2, uart_buffer);
+
+        TM_USART_Puts(USART2, "\r\nsplitString: ");
+        TM_USART_Puts(USART2, itoa(splitString(uart_buffer, strindex), buf,10));
+        TM_USART_Puts(USART2, "\r\n");
+
+        //printf(LCD_output[0], "Temperatura: %.1f (%1.f-%.1f) C", 1.1, 2.3, 4.5 );
+
+
+        
     }
 }
 
