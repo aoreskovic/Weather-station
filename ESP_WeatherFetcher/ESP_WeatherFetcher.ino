@@ -5,7 +5,7 @@
 
 
 StaticJsonBuffer<10000> jsonBuffer;
-
+String json;
 
 void setup()
 {
@@ -17,94 +17,209 @@ void setup()
   Serial.print("Spajam se: ");
   //Serial.println(initWifi());
 
-  String json;
 
-  {
-    getWeatherData(&json);
-  } 
+
   /*Serial.println("---------u mainu sam");
-  /*Serial.println(json); /**/
+    /*Serial.println(json); /**/
 
+  /*
+    JsonObject &root = jsonBuffer.parseObject(json);
 
-  JsonObject &root = jsonBuffer.parseObject(json);
-
-  if (!root.success())
-  {
+    if (!root.success())
+    {
     Serial.println("parseObject() failed");
     return;
-  }
+    }
 
-  String toSend = "^$";
+    String toSend = "^$";
 
-  
-  double temp_now = root["current"]["temp_c"];
-  double temp_now_feels = root["current"]["feelslike_c"];
-  
-  String description = root["current"]["condition"]["text"];
-  int clouds = root["current"]["cloud"];
-  String date = root["location"]["localtime"]; 
+    String tmp;
+    double temp_now = root["current"]["temp_c"];
+    double temp_now_feels = root["current"]["feelslike_c"];
 
-  toSend += String(date) + "$";
-  toSend += String(temp_now) + "$";
-  toSend += String(temp_now_feels) + "$";
-  toSend += description + "$";
-  
-  {
-  String maxtemp  = root["forecast"]["forecastday"][0]["day"]["maxtemp_c"];
-  String mintemp  = root["forecast"]["forecastday"][0]["day"]["mintemp_c"];
-  double percip   = root["forecast"]["forecastday"][0]["day"]["totalprecip_mm"];
-  String text     = root["forecast"]["forecastday"][0]["day"]["condition"]["text"];
+    String description = root["current"]["condition"]["text"];
+    int clouds = root["current"]["cloud"];
+    String date = root["location"]["localtime"];
+    description.toLowerCase();
 
-  toSend += String(maxtemp) + "$";
-  toSend += String(mintemp) + "$";
-  toSend += String(percip) + "$";
-  toSend += text + "$";
-  }
-  {
-  String maxtemp  = root["forecast"]["forecastday"][0]["day"]["maxtemp_c"];
-  String mintemp  = root["forecast"]["forecastday"][0]["day"]["mintemp_c"];
-  double percip   = root["forecast"]["forecastday"][0]["day"]["totalprecip_mm"];
-  String text     = root["forecast"]["forecastday"][0]["day"]["condition"]["text"];
+    tmp = String(date);
+    tmp.trim();
+    toSend += tmp + "$";
 
-  toSend += String(maxtemp) + "$";
-  toSend += String(mintemp) + "$";
-  toSend += String(percip) + "$";
-  toSend += text + "$";
-  }
+    tmp = String(temp_now,0);
+    tmp.trim();
+    toSend += tmp + "$";
 
-  Serial.println(toSend);
+    tmp = String(temp_now_feels,0);
+    tmp.trim();
+    toSend += tmp + "$";
+
+    toSend += description + "$";
+
+    {
+    double maxtemp  = root["forecast"]["forecastday"][0]["day"]["maxtemp_c"];
+    double mintemp  = root["forecast"]["forecastday"][0]["day"]["mintemp_c"];
+    double percip   = root["forecast"]["forecastday"][0]["day"]["totalprecip_mm"];
+    String text     = root["forecast"]["forecastday"][0]["day"]["condition"]["text"];
+    text.toLowerCase();
+
+    tmp = String(maxtemp,0);
+    tmp.trim();
+    toSend += tmp + "$";
+
+    tmp = String(mintemp,0);
+    tmp.trim();
+    toSend += tmp + "$";
+
+    tmp = String(percip,0);
+    tmp.trim();
+    toSend += tmp + "$";
+
+    toSend += text + "$";
+    }
+    {
+    double maxtemp  = root["forecast"]["forecastday"][0]["day"]["maxtemp_c"];
+    double mintemp  = root["forecast"]["forecastday"][0]["day"]["mintemp_c"];
+    double percip   = root["forecast"]["forecastday"][0]["day"]["totalprecip_mm"];
+    String text     = root["forecast"]["forecastday"][0]["day"]["condition"]["text"];
+    text.toLowerCase();
 
 
-/*
-  // Print values.
-  Serial.println("");
-  Serial.print("Temp: ");
-  Serial.println(temp_now);
-  Serial.print("Description: ");
-  Serial.println(description);
-  Serial.print("Clouds: ");
-  Serial.print(clouds);
-  Serial.println(" %");
+    tmp = String(maxtemp,0);
+    tmp.trim();
+    toSend += tmp + "$";
 
-  Serial.println("ovo dalje je test novih parseva");
+    tmp = String(mintemp,0);
+    tmp.trim();
+    toSend += tmp + "$";
 
-  Serial.print("maxtemp: ");
-  Serial.println(maxtemp);
+    tmp = String(percip,0);
+    tmp.trim();
+    toSend += tmp + "$";
 
-  Serial.print("mintemp: ");
-  Serial.println(mintemp);
+    toSend += text + "$";
+    }
 
-  Serial.print("percio: ");
-  Serial.println(percip);
+    Serial.println(toSend);*/
 
-  Serial.print("text: ");
-  Serial.println(text);*/
+
+  /*
+    // Print values.
+    Serial.println("");
+    Serial.print("Temp: ");
+    Serial.println(temp_now);
+    Serial.print("Description: ");
+    Serial.println(description);
+    Serial.print("Clouds: ");
+    Serial.print(clouds);
+    Serial.println(" %");
+
+    Serial.println("ovo dalje je test novih parseva");
+
+    Serial.print("maxtemp: ");
+    Serial.println(maxtemp);
+
+    Serial.print("mintemp: ");
+    Serial.println(mintemp);
+
+    Serial.print("percio: ");
+    Serial.println(percip);
+
+    Serial.print("text: ");
+    Serial.println(text);*/
 
 
 }
 
 void loop()
 {
+  {
+    getWeatherData(&json);
+  }
+  JsonObject &root = jsonBuffer.parseObject(json);
+
+  if (!root.success())
+  {
+    Serial.println("parseObject() failed");
+    delay(5000);
+  }
+  else
+  {
+
+    String toSend = "^$";
+
+    String tmp;
+    double temp_now = root["current"]["temp_c"];
+    double temp_now_feels = root["current"]["feelslike_c"];
+
+    String description = root["current"]["condition"]["text"];
+    int clouds = root["current"]["cloud"];
+    String date = root["location"]["localtime"];
+    description.toLowerCase();
+
+    tmp = String(date);
+    tmp.trim();
+    toSend += tmp + "$";
+
+    tmp = String(temp_now, 0);
+    tmp.trim();
+    toSend += tmp + "$";
+
+    tmp = String(temp_now_feels, 0);
+    tmp.trim();
+    toSend += tmp + "$";
+
+    toSend += description + "$";
+
+    {
+      double maxtemp  = root["forecast"]["forecastday"][0]["day"]["maxtemp_c"];
+      double mintemp  = root["forecast"]["forecastday"][0]["day"]["mintemp_c"];
+      double percip   = root["forecast"]["forecastday"][0]["day"]["totalprecip_mm"];
+      String text     = root["forecast"]["forecastday"][0]["day"]["condition"]["text"];
+      text.toLowerCase();
+
+      tmp = String(maxtemp, 0);
+      tmp.trim();
+      toSend += tmp + "$";
+
+      tmp = String(mintemp, 0);
+      tmp.trim();
+      toSend += tmp + "$";
+
+      tmp = String(percip, 0);
+      tmp.trim();
+      toSend += tmp + "$";
+
+      toSend += text + "$";
+    }
+    {
+      double maxtemp  = root["forecast"]["forecastday"][0]["day"]["maxtemp_c"];
+      double mintemp  = root["forecast"]["forecastday"][0]["day"]["mintemp_c"];
+      double percip   = root["forecast"]["forecastday"][0]["day"]["totalprecip_mm"];
+      String text     = root["forecast"]["forecastday"][0]["day"]["condition"]["text"];
+      text.toLowerCase();
+
+
+      tmp = String(maxtemp, 0);
+      tmp.trim();
+      toSend += tmp + "$";
+
+      tmp = String(mintemp, 0);
+      tmp.trim();
+      toSend += tmp + "$";
+
+      tmp = String(percip, 0);
+      tmp.trim();
+      toSend += tmp + "$";
+
+      toSend += text + "$";
+    }
+
+    Serial.println(toSend);
+  }
+  json = "";
+  jsonBuffer.clear();
+  delay(20000);
 }
 
 

@@ -27,21 +27,25 @@ Project File Date:  01/11/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling string.c...
-Src\string.c(55): warning:  #223-D: function "strstr" declared implicitly
-          index = strstr(str, "$");
-Src\string.c(55): error:  #513: a value of type "int" cannot be assigned to an entity of type "char *"
-          index = strstr(str, "$");
-Src\string.c: 1 warning, 1 error
 compiling main.c...
-Src\icons.h(9): warning:  #1-D: last line of file ends without a newline
-  		
-main.c(41): warning:  #177-D: variable "data" was declared but never referenced
+main.c(42): warning:  #177-D: variable "data" was declared but never referenced
       uint8_t data;
-main.c(49): warning:  #177-D: variable "i" was declared but never referenced
+main.c(50): warning:  #177-D: variable "i" was declared but never referenced
       int i;
-main.c: 3 warnings, 0 errors
-".\Objects\Template.axf" - 1 Error(s), 4 Warning(s).
+main.c(122): warning:  #9-D: nested comment is not allowed
+          /*x = x + 1;
+main.c(176): warning:  #9-D: nested comment is not allowed
+          }/**/
+main.c(169): warning:  #177-D: variable "bu4" was declared but never referenced
+          char bu4[25] = "";
+main.c(144): warning:  #177-D: variable "buf" was declared but never referenced
+      char buf[10];
+main.c(149): warning:  #177-D: variable "out" was declared but never referenced
+      char out[12][16];
+main.c: 7 warnings, 0 errors
+linking...
+Program Size: Code=15862 RO-data=538 RW-data=320 ZI-data=82704  
+".\Objects\Template.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -59,8 +63,7 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Target not created.
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

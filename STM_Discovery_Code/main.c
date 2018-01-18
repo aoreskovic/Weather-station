@@ -1,13 +1,14 @@
 /* main.c */
 
 #include <stdio.h>
+#include <string.h>
 
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
 #include "semphr.h"
 
-#include "string.h"
+#include "strings.h"
 #include "icons.h"
 
 #include <stm32f4_discovery.h>
@@ -44,7 +45,7 @@ int main(void)
     TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
 
     /* Put string to USART */
-    TM_USART_Puts(USART2, "Hello world\n\r");
+    printf("Hello world\r\n");
 
     int i;
 
@@ -68,6 +69,9 @@ int main(void)
     LCDI2C_createChar(5, cloud_r);
     LCDI2C_clear();
 
+    LCDI2C_createChar(6, celz);
+    LCDI2C_clear();
+
     // -------  blink backlight  -------------
     /*LCDI2C_backlight(); //Turn on Backlight
     Delay(100);
@@ -83,6 +87,7 @@ int main(void)
     LCDI2C_write(2);
     LCDI2C_write(3);
     LCDI2C_write(4);
+    LCDI2C_write(5);
     LCDI2C_write(5);
 
     //Set cursor position. (column, line) Top line is 0, bottom is 1.
@@ -107,14 +112,14 @@ void vTask1(void *pvParameters)
 
     while (1)
     {
-        itoa(x, buf, 16); // itoa takes number base as 3rd argument. Here; hex.
-        LCDI2C_setCursor(11, 1);
+        itoaa(x, buf, 16); // itoa takes number base as 3rd argument. Here; hex.
+        /*LCDI2C_setCursor(11, 1);
         LCDI2C_write_String(buf);
         LCDI2C_write_String("  ");
 
         //LCDI2C_setCursor(18, x % 4 + 1);
         //LCDI2C_write_String("  ");
-        x = x + 1;
+        /*x = x + 1;
         if (x > 3)
             x = 0;
 
@@ -130,7 +135,7 @@ void vTask1(void *pvParameters)
         LCDI2C_setCursor(16, (x + 2) % 4);
         LCDI2C_write_String(" ");
         LCDI2C_setCursor(17, (x + 0) % 4);
-        LCDI2C_write_String(" ");
+        LCDI2C_write_String(" ");*/
     }
 }
 
@@ -140,6 +145,8 @@ void vTask2(void *pvParameters)
     int numchar = 0;
 
     int strindex[15];
+    int i;
+    char out[12][16];
 
     while (1)
     {
@@ -149,17 +156,85 @@ void vTask2(void *pvParameters)
         if((numchar == 0) || (uart_buffer[0] != '^'))
             continue;
 
-        
-        TM_USART_Puts(USART2, "\r\nNumchar: ");
-        TM_USART_Puts(USART2, itoa(numchar, buf,10));
-        TM_USART_Puts(USART2, "\r\n");
+        printf("\r\nNumchar: %d\r\n", numchar);
         TM_USART_Puts(USART2, uart_buffer);
 
-        TM_USART_Puts(USART2, "\r\nsplitString: ");
-        TM_USART_Puts(USART2, itoa(splitString(uart_buffer, strindex), buf,10));
-        TM_USART_Puts(USART2, "\r\n");
 
-        //printf(LCD_output[0], "Temperatura: %.1f (%1.f-%.1f) C", 1.1, 2.3, 4.5 );
+        printf("\r\nsplitString: %d", splitString(uart_buffer, strindex));
+        printf("\r\nDal radi scanf?");
+
+        char bu1[25] = "";
+        char bu2[25] = "";
+        char bu3[25] = "";
+        char bu4[25] = "";
+
+        char weat[10] = "";
+
+        /*for(i = 0; i < 12; i++){
+            getNthString(bu1, uart_buffer, strindex, i);
+            printf("\r\n %d %s", i, bu1);
+        }/**/
+
+        getNthString(bu1, uart_buffer, strindex, 0);
+        getNthString(bu2, uart_buffer, strindex, 3);
+        getNthString(bu3, uart_buffer, strindex, 7);
+        {
+            int j = 0;
+            if((strstr(bu2, "clear") != NULL) || (strstr(bu3, "clear") != NULL) || (strstr(bu2, "sun") != NULL) || (strstr(bu3, "sun") != NULL)){
+                weat[j++] = 2;
+                weat[j++] = 3;
+            }
+            if((strstr(bu2, "cloud") != NULL) || (strstr(bu3, "cloud") != NULL)){
+                weat[j++] = 4;
+                weat[j++] = 5;
+            }
+            if((strstr(bu2, "rain") != NULL) || (strstr(bu3, "rain") != NULL)){
+                weat[j++] = 1;
+            }
+            weat[j] = 0;
+        }
+        sprintf(LCD_output[0], "%s", bu1);
+
+
+        getNthString(bu1, uart_buffer, strindex, 1);
+        getNthString(bu2, uart_buffer, strindex, 5);
+        getNthString(bu3, uart_buffer, strindex, 4);
+        sprintf(LCD_output[1], "T %s\6(%s-%s)\6C %s", bu1, bu2, bu3, weat);
+
+        sprintf(LCD_output[2], " Za sutra:");
+
+
+        //---------------------------------------
+        getNthString(bu2, uart_buffer, strindex, 11);
+        {
+            int j = 0;
+            if(strstr(bu2, "clear") != NULL){
+                weat[j++] = 2;
+                weat[j++] = 3;
+            }
+            if(strstr(bu2, "cloud") != NULL){
+                weat[j++] = 4;
+                weat[j++] = 5;
+            }
+            if(strstr(bu2, "rain") != NULL){
+                weat[j++] = 1;
+            }
+            weat[j] = 0;
+        }
+
+
+        getNthString(bu2, uart_buffer, strindex, 9);
+        getNthString(bu3, uart_buffer, strindex, 8);
+        sprintf(LCD_output[3], "T %s-%s\6C     %s", bu2, bu3, weat);
+
+
+
+
+        for(i = 0; i < 4; i++){
+            LCDI2C_setCursor(0, i);
+            LCDI2C_write_String(LCD_output[i]);
+        }
+        
 
 
         
