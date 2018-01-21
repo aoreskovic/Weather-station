@@ -3,7 +3,7 @@ F (.\Src\gpio.h)(0x5A0AE772)()
 F (.\Src\LiquidCrystal_I2C.h)(0x5A57CAE1)()
 F (.\Src\I2C.h)(0x5A57A753)()
 F (.\Src\delay.h)(0x5A579F36)()
-F (.\main.h)(0x5A5F988C)()
+F (.\main.h)(0x5A64A2FA)()
 F (.\Src\icons.h)(0x5A60E92C)()
 F (.\Src\strings.h)(0x5A60D302)()
 F (.\Src\strings.c)(0x5A60E389)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\ -I Lib\CMSIS\Include -I Lib\CMSIS\Device\ST\STM32F4xx\Include -I Lib\STM32F4xx_StdPeriph_Driver\inc -I FreeRTOS\include -I FreeRTOS\portable\keil\ARM_CM4F -I Src\ -I Lib\TM-I H:\Dropbox\Projects\PPIUS_Weather-stationg\STM_Discovery_Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000" --C99-o .\objects\strings.o --omf_browse .\objects\strings.crf --depend .\objects\strings.d)
@@ -48,27 +48,13 @@ I (Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x573F09EC)
 I (Lib\TM\attributes.h)(0x5475B3A2)
 I (Lib\TM\defines.h)(0x5A609144)
 I (Lib\TM\tm_stm32f4_gpio.h)(0x569CB23E)
-F (.\main.c)(0x5A60EBF8)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\ -I Lib\CMSIS\Include -I Lib\CMSIS\Device\ST\STM32F4xx\Include -I Lib\STM32F4xx_StdPeriph_Driver\inc -I FreeRTOS\include -I FreeRTOS\portable\keil\ARM_CM4F -I Src\ -I Lib\TM-I H:\Dropbox\Projects\PPIUS_Weather-stationg\STM_Discovery_Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000" --C99-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x5A64A38E)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\ -I Lib\CMSIS\Include -I Lib\CMSIS\Device\ST\STM32F4xx\Include -I Lib\STM32F4xx_StdPeriph_Driver\inc -I FreeRTOS\include -I FreeRTOS\portable\keil\ARM_CM4F -I Src\ -I Lib\TM-I H:\Dropbox\Projects\PPIUS_Weather-stationg\STM_Discovery_Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000" --C99-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x56FE973E)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE973E)
-I (FreeRTOS\include\FreeRTOS.h)(0x573F2C06)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE973E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE973E)
-I (FreeRTOS\include\FreeRTOSConfig.h)(0x5A528E31)
-I (FreeRTOS\include\projdefs.h)(0x573F2C06)
-I (FreeRTOS\include\portable.h)(0x573F2C06)
-I (FreeRTOS\include\deprecated_definitions.h)(0x573F2C06)
-I (FreeRTOS\portable\keil\ARM_CM4F\portmacro.h)(0x573F2C07)
-I (FreeRTOS\include\mpu_wrappers.h)(0x573F2C06)
-I (FreeRTOS\include\task.h)(0x573F2C06)
-I (FreeRTOS\include\list.h)(0x573F2C06)
-I (FreeRTOS\include\queue.h)(0x573F2C06)
-I (FreeRTOS\include\semphr.h)(0x573F2C06)
-I (Src\strings.h)(0x5A60D302)
-I (Src\icons.h)(0x5A60E92C)
-I (.\stm32f4_discovery.h)(0x4EAA687E)
+I (.\main.h)(0x5A64A2FA)
 I (Lib\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x573C9464)
 I (Lib\CMSIS\Include\core_cm4.h)(0x573C939E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE973E)
 I (Lib\CMSIS\Include\core_cmInstr.h)(0x573C939C)
 I (Lib\CMSIS\Include\core_cmFunc.h)(0x573C939C)
 I (Lib\CMSIS\Include\core_cmSimd.h)(0x573C939C)
@@ -100,15 +86,29 @@ I (Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x573F09EC)
 I (Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x573F09EC)
 I (Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x573F09F2)
 I (Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x573F09EC)
-I (Lib\TM\defines.h)(0x5A609144)
-I (Lib\TM\tm_stm32f4_usart.h)(0x57176670)
-I (Lib\TM\attributes.h)(0x5475B3A2)
-I (Lib\TM\tm_stm32f4_gpio.h)(0x569CB23E)
-I (.\main.h)(0x5A5F988C)
 I (Src\gpio.h)(0x5A0AE772)
 I (Src\delay.h)(0x5A579F36)
 I (Src\I2C.h)(0x5A57A753)
 I (Src\LiquidCrystal_I2C.h)(0x5A57CAE1)
+I (FreeRTOS\include\FreeRTOS.h)(0x573F2C06)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE973E)
+I (FreeRTOS\include\FreeRTOSConfig.h)(0x5A528E31)
+I (FreeRTOS\include\projdefs.h)(0x573F2C06)
+I (FreeRTOS\include\portable.h)(0x573F2C06)
+I (FreeRTOS\include\deprecated_definitions.h)(0x573F2C06)
+I (FreeRTOS\portable\keil\ARM_CM4F\portmacro.h)(0x573F2C07)
+I (FreeRTOS\include\mpu_wrappers.h)(0x573F2C06)
+I (FreeRTOS\include\task.h)(0x573F2C06)
+I (FreeRTOS\include\list.h)(0x573F2C06)
+I (FreeRTOS\include\queue.h)(0x573F2C06)
+I (FreeRTOS\include\semphr.h)(0x573F2C06)
+I (Src\strings.h)(0x5A60D302)
+I (Src\icons.h)(0x5A60E92C)
+I (.\stm32f4_discovery.h)(0x4EAA687E)
+I (Lib\TM\defines.h)(0x5A609144)
+I (Lib\TM\tm_stm32f4_usart.h)(0x57176670)
+I (Lib\TM\attributes.h)(0x5475B3A2)
+I (Lib\TM\tm_stm32f4_gpio.h)(0x569CB23E)
 F (.\Src\delay.c)(0x5A579E64)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\ -I Lib\CMSIS\Include -I Lib\CMSIS\Device\ST\STM32F4xx\Include -I Lib\STM32F4xx_StdPeriph_Driver\inc -I FreeRTOS\include -I FreeRTOS\portable\keil\ARM_CM4F -I Src\ -I Lib\TM-I H:\Dropbox\Projects\PPIUS_Weather-stationg\STM_Discovery_Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000" --C99-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
 I (Src\delay.h)(0x5A579F36)
 I (Lib\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x573C9464)

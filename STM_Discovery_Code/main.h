@@ -11,4 +11,17 @@
 #include "I2C.h"
 #include "LiquidCrystal_I2C.h"
 
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "semphr.h"
+
+#include "strings.h"
+#include "icons.h"
+
+#include <stm32f4_discovery.h>
+
+#include "defines.h"
+#include "tm_stm32f4_usart.h"
+
 #endif

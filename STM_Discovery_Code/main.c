@@ -3,18 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-#include "semphr.h"
 
-#include "strings.h"
-#include "icons.h"
-
-#include <stm32f4_discovery.h>
-
-#include "defines.h"
-#include "tm_stm32f4_usart.h"
 
 #include <main.h>
 //#include <stdlib.h>
@@ -27,10 +16,6 @@ volatile char received_string[MAX_STRLEN + 1]; // this will hold the recieved st
 // forward declarations of task functions
 void vTask1(void *pvParameters);
 void vTask2(void *pvParameters);
-void vTask3(void *pvParameters);
-void vTask4(void *pvParameters);
-
-xTaskHandle xTaskHandle1, xTaskHandle2, xTaskHandle3, xTaskHandle4;
 
 char uart_buffer[401] = "";
 
@@ -45,7 +30,6 @@ int main(void)
     TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
 
     /* Put string to USART */
-    printf("Hello world\r\n");
 
     int i;
 
@@ -88,58 +72,24 @@ int main(void)
     LCDI2C_write(3);
     LCDI2C_write(4);
     LCDI2C_write(5);
-    LCDI2C_write(5);
+    LCDI2C_write(6);
 
     //Set cursor position. (column, line) Top line is 0, bottom is 1.
     LCDI2C_setCursor(0, 1);
 
     //Write an integer:
-    LCDI2C_write_String("ARM-GCC  x=");
+    LCDI2C_write_String("Weather Station");
 
     //USART_puts(USART2, "Init complete! Hello World!\r\n"); // just send a message to indicate that it works
 
     gpio_init();
     STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_GPIO);
-    xTaskCreate(vTask1, "TASK1", 1000, NULL, 1, &xTaskHandle1);
-    xTaskCreate(vTask2, "TASK2", 1000, NULL, 1, NULL);
+    xTaskCreate(vTask1, "TASK1", 1000, NULL, 1, NULL);
     vTaskStartScheduler();
 }
 
+
 void vTask1(void *pvParameters)
-{
-    int x = 0;
-    char buf[10];
-
-    while (1)
-    {
-        itoaa(x, buf, 16); // itoa takes number base as 3rd argument. Here; hex.
-        /*LCDI2C_setCursor(11, 1);
-        LCDI2C_write_String(buf);
-        LCDI2C_write_String("  ");
-
-        //LCDI2C_setCursor(18, x % 4 + 1);
-        //LCDI2C_write_String("  ");
-        /*x = x + 1;
-        if (x > 3)
-            x = 0;
-
-        LCDI2C_setCursor(15, (x + 1) % 4);
-        LCDI2C_write(1);
-        LCDI2C_setCursor(16, (x + 2) % 4);
-        LCDI2C_write(1);
-        LCDI2C_setCursor(17, (x + 0) % 4);
-        LCDI2C_write(1);
-        vTaskDelay(500 / portTICK_RATE_MS);
-        LCDI2C_setCursor(15, (x + 1) % 4);
-        LCDI2C_write_String(" ");
-        LCDI2C_setCursor(16, (x + 2) % 4);
-        LCDI2C_write_String(" ");
-        LCDI2C_setCursor(17, (x + 0) % 4);
-        LCDI2C_write_String(" ");*/
-    }
-}
-
-void vTask2(void *pvParameters)
 {   
     char buf[10];
     int numchar = 0;
@@ -170,10 +120,6 @@ void vTask2(void *pvParameters)
 
         char weat[10] = "";
 
-        /*for(i = 0; i < 12; i++){
-            getNthString(bu1, uart_buffer, strindex, i);
-            printf("\r\n %d %s", i, bu1);
-        }/**/
 
         getNthString(bu1, uart_buffer, strindex, 0);
         getNthString(bu2, uart_buffer, strindex, 3);
@@ -227,40 +173,10 @@ void vTask2(void *pvParameters)
         getNthString(bu3, uart_buffer, strindex, 8);
         sprintf(LCD_output[3], "T %s-%s\6C     %s", bu2, bu3, weat);
 
-
-
-
         for(i = 0; i < 4; i++){
             LCDI2C_setCursor(0, i);
             LCDI2C_write_String(LCD_output[i]);
         }
         
-
-
-        
-    }
-}
-
-void vTask3(void *pvParameters)
-{
-    uint32_t led_state;
-    led_state = 1;
-    while (1)
-    {
-        vTaskDelay(500 / portTICK_RATE_MS);     // LED blinking frequency
-        gpio_led_state(LED5_RED_ID, led_state); // orange LED
-        led_state = (led_state == 1) ? 0 : 1;
-    }
-}
-
-void vTask4(void *pvParameters)
-{
-    uint32_t led_state;
-    led_state = 1;
-    while (1)
-    {
-        vTaskDelay(500 / portTICK_RATE_MS);      // LED blinking frequency
-        gpio_led_state(LED6_BLUE_ID, led_state); // orange LED
-        led_state = (led_state == 1) ? 0 : 1;
     }
 }

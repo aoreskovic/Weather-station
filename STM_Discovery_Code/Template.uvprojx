@@ -334,7 +334,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx, USE_STDPERIPH_DRIVER, HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>.\;Lib\CMSIS\Include;Lib\CMSIS\Device\ST\STM32F4xx\Include;Lib\STM32F4xx_StdPeriph_Driver\inc;FreeRTOS\include;FreeRTOS\portable\keil\ARM_CM4F;Src\</IncludePath>
+              <IncludePath>.\;Lib\CMSIS\Include;Lib\CMSIS\Device\ST\STM32F4xx\Include;Lib\STM32F4xx_StdPeriph_Driver\inc;FreeRTOS\include;FreeRTOS\portable\keil\ARM_CM4F;Src\;Lib\TM</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -378,6 +378,11 @@
           <GroupName>Header</GroupName>
           <Files>
             <File>
+              <FileName>gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\gpio.h</FilePath>
+            </File>
+            <File>
               <FileName>LiquidCrystal_I2C.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Src\LiquidCrystal_I2C.h</FilePath>
@@ -398,24 +403,14 @@
               <FilePath>.\main.h</FilePath>
             </File>
             <File>
-              <FileName>gpio.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Src\gpio.h</FilePath>
-            </File>
-            <File>
               <FileName>icons.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Src\icons.h</FilePath>
             </File>
             <File>
-              <FileName>usart.h</FileName>
+              <FileName>strings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Src\usart.h</FilePath>
-            </File>
-            <File>
-              <FileName>string.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Src\string.h</FilePath>
+              <FilePath>.\Src\strings.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -423,19 +418,9 @@
           <GroupName>Source</GroupName>
           <Files>
             <File>
-              <FileName>string.c</FileName>
+              <FileName>strings.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Src\string.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Src\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Src\gpio.c</FilePath>
+              <FilePath>.\Src\strings.c</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
@@ -456,6 +441,16 @@
               <FileName>LiquidCrystal_I2C.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Src\LiquidCrystal_I2C.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>redirect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\redirect.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -548,9 +543,44 @@
           <GroupName>STM_Lib</GroupName>
           <Files>
             <File>
-              <FileName>STM_Peripheral_Lib_v1.7.1.lib</FileName>
+              <FileName>STM_Peripheral_Lib_v1.8.0.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>.\STM_Peripheral_Lib_v1.7.1.lib</FilePath>
+              <FilePath>.\STM_Peripheral_Lib_v1.8.0.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TM</GroupName>
+          <Files>
+            <File>
+              <FileName>attributes.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Lib\TM\attributes.h</FilePath>
+            </File>
+            <File>
+              <FileName>defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Lib\TM\defines.h</FilePath>
+            </File>
+            <File>
+              <FileName>tm_stm32f4_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lib\TM\tm_stm32f4_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>tm_stm32f4_gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Lib\TM\tm_stm32f4_gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>tm_stm32f4_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lib\TM\tm_stm32f4_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>tm_stm32f4_usart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Lib\TM\tm_stm32f4_usart.h</FilePath>
             </File>
           </Files>
         </Group>

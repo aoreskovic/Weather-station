@@ -22,29 +22,49 @@ Dialog DLL:      TCM.DLL V1.14.9.0
  
 <h2>Project:</h2>
 H:\Dropbox\Projects\PPIUS_Weather-stationg\STM_Discovery_Code\Template.uvprojx
-Project File Date:  01/11/2018
+Project File Date:  01/19/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'Target 1'
+Rebuild target 'Target 1'
+compiling delay.c...
+compiling strings.c...
+Src\strings.c(56): warning:  #177-D: variable "index" was declared but never referenced
+      char *index;
+Src\strings.c: 1 warning, 0 errors
 compiling main.c...
-main.c(42): warning:  #177-D: variable "data" was declared but never referenced
+main.c(27): warning:  #177-D: variable "data" was declared but never referenced
       uint8_t data;
-main.c(50): warning:  #177-D: variable "i" was declared but never referenced
+main.c(34): warning:  #177-D: variable "i" was declared but never referenced
       int i;
-main.c(122): warning:  #9-D: nested comment is not allowed
-          /*x = x + 1;
-main.c(176): warning:  #9-D: nested comment is not allowed
+main.c(126): warning:  #9-D: nested comment is not allowed
           }/**/
-main.c(169): warning:  #177-D: variable "bu4" was declared but never referenced
+main.c(119): warning:  #177-D: variable "bu4" was declared but never referenced
           char bu4[25] = "";
-main.c(144): warning:  #177-D: variable "buf" was declared but never referenced
+main.c(94): warning:  #177-D: variable "buf" was declared but never referenced
       char buf[10];
-main.c(149): warning:  #177-D: variable "out" was declared but never referenced
+main.c(99): warning:  #177-D: variable "out" was declared but never referenced
       char out[12][16];
-main.c: 7 warnings, 0 errors
+main.c: 6 warnings, 0 errors
+compiling I2C.c...
+compiling LiquidCrystal_I2C.c...
+compiling gpio.c...
+compiling croutine.c...
+compiling event_groups.c...
+compiling list.c...
+compiling queue.c...
+compiling tasks.c...
+compiling timers.c...
+compiling redirect.c...
+compiling heap_2.c...
+compiling port.c...
+assembling startup_stm32f40_41xxx.s...
+compiling system_stm32f4xx.c...
+compiling stm32f4_discovery.c...
+compiling tm_stm32f4_gpio.c...
+compiling tm_stm32f4_usart.c...
 linking...
-Program Size: Code=15862 RO-data=538 RW-data=320 ZI-data=82704  
+Program Size: Code=15790 RO-data=538 RW-data=304 ZI-data=82704  
 ".\Objects\Template.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -63,7 +83,7 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:19
 </pre>
 </body>
 </html>
